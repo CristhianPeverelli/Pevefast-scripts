@@ -1,2 +1,2 @@
 # UnityProjects
-Here are some of my unity 3d/2d videogames that I develop during free time :)
+Here are some scripts written during the creation of unity 2D/3D videogames. (all of them are made by myself as self-educated)
