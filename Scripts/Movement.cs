@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour{
 
-    [SerializeField] float turnMovement;
+    [SerializeField] float turnSpeed;
+    [SerializeField] float frontSpeed;
     [SerializeField] int actualColumn;
     [SerializeField] bool canMove;
-    [SerializeField] float carSpeed;
     
     void Start(){
         canMove = true;
@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour{
 
     void Update(){
         ProcessInput();
-        transform.Translate(Vector3.forward * Time.deltaTime * carSpeed);
+        transform.Translate(Vector3.forward * Time.deltaTime * frontSpeed);
     }
 
     void ProcessInput(){
@@ -33,8 +33,8 @@ public class Movement : MonoBehaviour{
     public void moveRight(){
         if(actualColumn < 1){
             canMove = false;
-            Invoke("restoreMovement",0.33f);
-            for(float i = 0; i < 0.50f; i+=0.005f){
+            Invoke("restoreMovement",0.5f);
+            for(float i = 0; i < 0.33f; i+=0.005f){
                 Invoke("rightMov", 0.05f+i);
             }
             actualColumn++;
@@ -44,8 +44,8 @@ public class Movement : MonoBehaviour{
     public void moveLeft(){
         if(actualColumn > -1){
             canMove = false;
-            Invoke("restoreMovement",0.33f);
-            for(float i = 0; i < 0.50f; i+=0.005f){
+            Invoke("restoreMovement",0.5f);
+            for(float i = 0; i < 0.33f; i+=0.005f){
                 Invoke("leftMov", 0.05f+i);
             }
             actualColumn--;
@@ -53,11 +53,11 @@ public class Movement : MonoBehaviour{
     }
 
     void leftMov(){
-        transform.Translate(Vector3.left * turnMovement, Space.World);
+        transform.Translate(Vector3.left * turnSpeed, Space.World);
     }
 
     void rightMov(){
-        transform.Translate(Vector3.right * turnMovement, Space.World);
+        transform.Translate(Vector3.right * turnSpeed, Space.World);
     } 
 
     void restoreMovement(){

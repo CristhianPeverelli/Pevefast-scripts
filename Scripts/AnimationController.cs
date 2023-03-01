@@ -5,13 +5,13 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour{
 
     Animator animator;
-    int actColumn;
     bool canMove;
+    int actualColumn;
    
     void Start(){
-        actColumn = 0;
         animator = gameObject.GetComponent<Animator>();
         canMove = true;
+        actualColumn = 0;
     }
 
     void Update(){
@@ -21,29 +21,33 @@ public class AnimationController : MonoBehaviour{
     void ProcessInput(){
 
         if(Input.GetKey(KeyCode.A)){
-            if(canMove){ moveLeft(); }
+            moveLeft();
         }
         else if(Input.GetKey(KeyCode.D)){
-            if(canMove){ moveRight(); }
+            moveRight();
         }
 
     }
 
-    void moveLeft(){
-        if(actColumn > -1){
-            canMove = false;
-            animator.SetBool("MoveToLeft",true);
-            Invoke("endMov",0.33f);
-            actColumn--;
+    public void moveLeft(){
+        if(canMove){ 
+            if(actualColumn > -1){
+                canMove = false;
+                animator.SetBool("MoveToLeft",true);
+                Invoke("endMov",0.33f);
+                actualColumn--;
+            }
         }
     }
 
-    void moveRight(){
-        if(actColumn < 1){
-            canMove = false;
-            animator.SetBool("MoveToRight",true);
-            Invoke("endMov",0.33f);
-            actColumn++;
+    public void moveRight(){
+        if(canMove){ 
+            if(actualColumn < 1){
+                canMove = false;
+                animator.SetBool("MoveToRight",true);
+                Invoke("endMov",0.33f);
+                actualColumn++;
+            }
         }
     }
 
